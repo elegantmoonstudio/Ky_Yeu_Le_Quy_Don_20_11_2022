@@ -14,13 +14,13 @@
         <h2 class="title">Kỷ Yếu Lê Quý Đôn 2022-2023</h2>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                <li class="btn-prev page-item">
+                <li class="btn-prev-top page-item">
                     <a class="page-link" href="#" id="-1">Previous</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="#" id="page-info">1</a>
+                    <a class="page-link" href="#" id="page-info-top">1</a>
                 </li>
-                <li class="btn-next page-item">
+                <li class="btn-next-top page-item">
                     <a class="page-link" href="#" id="4">Next</a>
                 </li>
             </ul>
@@ -32,13 +32,13 @@
         </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                <li class="btn-prev page-item">
+                <li class="btn-prev-bottom page-item">
                     <a class="page-link" href="#" id="-1">Previous</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="#" id="page-info">1</a>
+                    <a class="page-link" href="#" id="page-info-bottom">1</a>
                 </li>
-                <li class="btn-next page-item">
+                <li class="btn-next-bottom page-item">
                     <a class="page-link" href="#" id="4">Next</a>
                 </li>
             </ul>
@@ -82,9 +82,9 @@
                 await get_image(dir, "img (" + i + ").jpg", index);
             }
         }
-        const btn_next = document.querySelector('.btn-next');
-        const btn_prev = document.querySelector('.btn-prev');
-        btn_next.addEventListener('click', () => {
+        const btn_next_top = document.querySelector('.btn-next-top');
+        const btn_prev_top = document.querySelector('.btn-prev-top');
+        btn_next_top.addEventListener('click', () => {
             cur_page++;
             if (cur_page > total_pages) {
                 cur_page = total_pages
@@ -94,11 +94,12 @@
                 start = 1
             }
             end = cur_page * per_page;
-            document.getElementById('page-info').innerHTML = cur_page;
+            document.getElementById('page-info-top').innerHTML = cur_page;
+            document.getElementById('page-info-bottom').innerHTML = cur_page;
             document.getElementById('column_0').innerHTML = '';
             getMultipleText(start, end).then(() => {})
         })
-        btn_prev.addEventListener('click', () => {
+        btn_prev_top.addEventListener('click', () => {
             cur_page--;
             if (cur_page < 1) {
                 cur_page = 1
@@ -109,7 +110,41 @@
             }
             end = cur_page * per_page;
             temp_content = ''
-            document.getElementById('page-info').innerHTML = cur_page;
+            document.getElementById('page-info-top').innerHTML = cur_page;
+            document.getElementById('page-info-bottom').innerHTML = cur_page;
+            document.getElementById('column_0').innerHTML = '';
+            getMultipleText(start, end).then(() => {})
+        })
+        const btn_next_bottom = document.querySelector('.btn-next-bottom');
+        const btn_prev_bottom = document.querySelector('.btn-prev-bottom');
+        btn_next_bottom.addEventListener('click', () => {
+            cur_page++;
+            if (cur_page > total_pages) {
+                cur_page = total_pages
+            }
+            start = (cur_page - 1) * per_page;
+            if (start < 1){
+                start = 1
+            }
+            end = cur_page * per_page;
+            document.getElementById('page-info-top').innerHTML = cur_page;
+            document.getElementById('page-info-bottom').innerHTML = cur_page;
+            document.getElementById('column_0').innerHTML = '';
+            getMultipleText(start, end).then(() => {})
+        })
+        btn_prev_bottom.addEventListener('click', () => {
+            cur_page--;
+            if (cur_page < 1) {
+                cur_page = 1
+            }
+            start = (cur_page - 1) * per_page;
+            if (start < 1){
+                start = 1
+            }
+            end = cur_page * per_page;
+            temp_content = ''
+            document.getElementById('page-info-top').innerHTML = cur_page;
+            document.getElementById('page-info-bottom').innerHTML = cur_page;
             document.getElementById('column_0').innerHTML = '';
             getMultipleText(start, end).then(() => {})
         })
